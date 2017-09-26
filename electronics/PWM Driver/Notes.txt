@@ -1,0 +1,5 @@
+http://www.raspberry-projects.com/pi/programming-in-c/spi/using-the-spi-interface
+
+http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/plain/Documentation/spi/spidev_test.c
+
+http://hertaville.com/2013/07/24/interfacing-an-spi-adc-mcp3008-chip-to-the-raspberry-pi-using-c/

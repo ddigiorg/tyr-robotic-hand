@@ -1,0 +1,3 @@
+http://www.eetimes.com/document.asp?doc_id=1279404
+
+Use shunt resistor and measure voltage across it using adc

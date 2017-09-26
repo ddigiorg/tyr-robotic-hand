@@ -1,0 +1,89 @@
+import sys
+import RPi.GPIO as GPIO
+from Tkinter import*
+
+GPIO.setwarnings(False)
+
+_clk = 18
+_dat = 16
+_lat = 22
+
+motorSpeed = 4095
+numdrivers = 1
+pwmbuffer = [0]*24*numdrivers
+userInput = ""
+
+root = Tk()
+
+#==================================================
+#Functions
+#==================================================
+def beginPWM():
+    if(pwmbuffer == False): return False
+
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(_clk, GPIO.OUT)
+    GPIO.setup(_dat, GPIO.OUT)
+    GPIO.setup(_lat, GPIO.OUT)
+    return True
+
+def writePWM():
+    GPIO.output(_lat, GPIO.LOW)
+    #24 channels per TLC5947
+    for i in range(24*numdrivers-1, -1, -1):
+        #12 bits per channel
+        for j in range(11, -1, -1):
+            GPIO.output(_clk, GPIO.LOW)
+
+            if(pwmbuffer[i] & (1<<j)):
+                GPIO.output(_dat, GPIO.HIGH)
+            else:
+                GPIO.output(_dat, GPIO.LOW)
+
+            GPIO.output(_clk, GPIO.HIGH)
+
+    GPIO.output(_clk, GPIO.LOW)
+
+    GPIO.output(_lat, GPIO.HIGH)
+    GPIO.output(_lat, GPIO.LOW)
+
+
+def setPWM(chan, pwm):
+    if(pwm > 4095): pwm = 4095
+    if(chan > 24*numdrivers): return
+    pwmbuffer[chan] = pwm
+
+def key(event):
+   userInput = event.char
+   if(event.char == "q"):
+      setPWM(0,0)
+      setPWM(1,0)
+   elif(event.char == "w"):
+      setPWM(0,0)
+      setPWM(1,motorSpeed)
+   elif(event.char == "s"):
+      setPWM(0,motorSpeed)
+      setPWM(1,0)
+   writePWM()
+   print(userInput)
+
+def callback(event):
+   frame.focus_set()
+   print "clicked at", event.x, event.y
+
+#def test():
+#   print(userInput)
+#   root.after(2000, test)
+
+#==================================================
+#Main
+#==================================================
+beginPWM()
+
+frame = Frame(root, width=100, height=100)
+frame.bind("<Key>", key)
+frame.bind("<Button-1>", callback)
+frame.pack()
+
+#root.after(2000, test)
+root.mainloop()

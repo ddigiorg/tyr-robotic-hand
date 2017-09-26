@@ -1,0 +1,3 @@
+L293D Quadruple Half-H Drivers
+
+http://www.ti.com/product/L293D?keyMatch=l293d&tisearch=Search-EN

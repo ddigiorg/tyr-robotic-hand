@@ -1,0 +1,70 @@
+from Tkinter import *
+
+root = Tk()
+
+def key(event):
+    print "pressed", repr(event.char)
+
+def callback(event):
+    frame.focus_set()
+    print "clicked at", event.x, event.y
+
+frame = Frame(root, width=100, height=100)
+frame.bind("<Key>", key)
+frame.bind("<Button-1>", callback)
+frame.pack()
+
+root.mainloop()
+
+======================================================================================================
+
+
+Client is not authorized to connect to ServerTraceback (most recent call last):
+    ...
+_tkinter.TclError: couldn't connect to display ":1"
+
+
+
+using the "sudo visudo" command, write these few lines to etc/sudoers*:
+
+Defaults    env_reset
+Defaults    secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Defaults    env_keep += "DISPLAY"
+Defaults    env_keep += "XAUTHORITY"
+
+using the "sudo nano ~/.bashrc", write these few lines to ~/.bashrc:
+
+if [ -z "$XAUTHORITY" ]; then
+    if [ -e $HOME/.Xauthority ]; then
+        export XAUTHORITY=$HOME/.Xauthority;
+    fi;
+fi
+
+^DID NOT WORK :<
+
+=======================================================================================================
+
+Via ssh you are, by some means, enabling X11 forwarding (ssh -X ...) in which graphic traffic comes back to the X server on the system you invoked the ssh command. The mechanics of ssh ensures that the correct DISPLAY is forwarded to the remote app, so it knows where to send its output. It usually manages to sort out authentication, although you may see some warning messages; we generally ignore them because the application runs!
+
+On an LXterminal then the (default) X server is the created during the startx process; same app but a completely different graphical display. And the authentication is not complete in this basic environment, but apparently it is in IDLE. In the LXterminal then run
+
+echo $DISPLAY
+:0.0
+
+which reports the graphical display that will be used by default. In this case display 0, screen 0 on the localhost. If is does't report anything then
+
+export DISPLAY=:0.0
+
+where were guessing there's only a single display with the usual numbers. 
+Then extend the authentication with
+
+xhost +
+access control disabled, clients can connect from any host
+
+this open up access to the local X server as reported by the command. Now try to run your Python application in the LXterminal.
+
+If it works the appropriate commands can be inserted in the shell startup file (for bash this is .bashrc). You might want to read man xhost http://unixhelp.ed.ac.uk/CGI/man-cgi?xhost+1 and man xauth http://www.x.org/archive/X11R6.8.1/doc/xauth.1.html since there are security issues with opening up access for X11 traffic. Not a serious issue on a home network behind a router/firewall, but something to be aware of.
+
+Hope this helps
+
+^WORKED!!! :D

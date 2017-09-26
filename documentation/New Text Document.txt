@@ -1,0 +1,51 @@
+24chan
+
+LAT -> RPi22
+/OE -> 
+CLK -> RPi18
+DIN -> RPi16
+GND -> RPi20
+ V+ -> RPi17
+
+0 -> HB2
+1 -> HB7
+2 ->
+
+0V+ -> +5V
+1V+ -> +5V
+2V+ ->
+
+
+
+H-Bridge
+
+ 1 -> Switch
+ 2 -> PWM0
+ 3 -> Motor1A
+ 4 -> GND
+ 5 -> 
+ 6 -> Motor1B
+ 7 -> PWM1
+ 8 -> Vmotor
+ 9 -> 
+10 -> 
+11 -> 
+12 -> 
+13 -> 
+14 -> 
+15 -> 
+16 -> +5V
+
+
+ADC
+
+ VDD -> RPi1
+ GND -> GND
+ SCL -> RPi5
+ SCA -> RPi3
+ADDR -> GND
+ALRT -> 
+  A0 -> 
+  A1 -> 
+  A2 -> 
+  A3 -> 

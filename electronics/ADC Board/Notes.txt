@@ -1,0 +1,12 @@
+ADS7953
+
+http://www.ti.com/product/ads7953
+
+REF5025
+
+http://www.ti.com/product/ref5025
+
+
+
+
+http://www.analog.com/library/analogdialogue/anniversary/21.html

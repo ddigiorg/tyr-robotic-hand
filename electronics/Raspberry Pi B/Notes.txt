@@ -1,0 +1,11 @@
+Raspbian
+
+user: pi
+pass: raspberry
+
+sudo apt-get update
+
+vncserver :1
+vnc pass: raspberr
+
+sudo i2cdetect -y 1

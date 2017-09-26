@@ -6,6 +6,8 @@ Tyr is a 3d printed robotic hand designed to be as cheap and as anthropomorphic 
 
 ![alt text](https://raw.githubusercontent.com/ddigiorg/tyr-robotic-hand/master/pictures/Hand_01.png "Model Hand")
 
+![alt text](https://raw.githubusercontent.com/ddigiorg/tyr-robotic-hand/master/pictures/finger-cross-section.png "Finger Cross Section")
+
 ## Mythos
 
 According to Norse mythology, Loki had three horrendous and powerful children: The serpent Jormungand, the death-goddess Hel, and the wolf Fenrir.  The Aesir gods had terrible prophetic inklings that these three beings would wrought death and destruction during the events of Ragnarok, the end times.  Because of these terrible forewarnings, the gods kept these monsters restrained.
